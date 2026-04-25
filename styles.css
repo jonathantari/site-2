@@ -344,12 +344,9 @@ body {
 
 /* ---------- Section 3 ---------- */
 
-#section-3 {
-  justify-content: center;
-}
-
 #section-3 .section__inner {
   display: grid;
+  text-align: left;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   column-gap: clamp(2rem, 6vw, 5rem);
   row-gap: clamp(1.75rem, 3.5vh, 2.75rem);
