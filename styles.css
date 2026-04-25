@@ -1,0 +1,581 @@
+/* ---------- Turnaround — stylesheet v3 ----------
+   Typography: Newsreader + Young Serif display, JetBrains Mono for UI.
+   Accent: forest green on rotating words.
+   Pinned, sticky-scroll sections so the user scrolls through each
+   reel's faces while the copy stays centered on screen.
+---------------------------------------------------- */
+
+:root {
+  --bg: #F4EFE6;
+  --ink: #1C1A17;
+  --ink-soft: #4A453E;
+  --ink-muted: #8A8378;
+  --ink-faint: rgba(28, 26, 23, 0.35);
+  --accent: #C07830;              /* warm amber — caring, editorial */
+  --accent-soft: rgba(192, 120, 48, 0.10);
+  --rule: rgba(28, 26, 23, 0.14);
+
+  --rot-dur: 600ms;
+  --rot-ease-chain: cubic-bezier(0.55, 0.05, 0.45, 0.95);
+  --rot-ease-final: cubic-bezier(0.2, 0.85, 0.25, 1);
+
+  --section-pad-y: clamp(6vh, 9vh, 11vh);
+  --section-pad-x: clamp(1.5rem, 6.5vw, 5rem);
+  --display-size: clamp(1.75rem, 3vw, 3rem);
+  --display-size-small: clamp(1.55rem, 2.6vw, 2.6rem);
+
+  --serif: "Newsreader", "Instrument Serif", Georgia, serif;
+  --serif-display: "Young Serif", "Newsreader", Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+html { scroll-behavior: auto; }
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- Section ---------- */
+
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--section-pad-y) var(--section-pad-x);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+/* Pinned sections are tall; their sticky child stays centered while
+   scroll progress drives the reel. Height is set inline via JS using
+   data-faces so one viewport-of-scroll = one reel flip. */
+.section--pinned {
+  padding: 0;
+  overflow: visible;
+  display: block;
+  min-height: 0;
+}
+
+.section__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  padding: var(--section-pad-y) var(--section-pad-x);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.section__inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section--pinned .section__inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- Wordmark ---------- */
+
+.wordmark {
+  position: fixed;
+  top: clamp(1.25rem, 3vh, 2rem);
+  left: var(--section-pad-x);
+  font-family: var(--serif);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+  z-index: 20;
+  mix-blend-mode: multiply;
+  text-decoration: none;
+  transition: color 200ms ease, opacity 200ms ease;
+}
+
+.wordmark:hover { opacity: 0.75; }
+
+/* ---------- Display type ---------- */
+
+.display {
+  font-family: var(--serif-display);
+  font-size: var(--display-size);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  max-width: 22ch;
+  text-wrap: pretty;
+  margin: 0;
+}
+
+.section--pinned .display {
+  max-width: 40ch;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.display.small {
+  font-size: var(--display-size-small);
+  max-width: 23ch;
+}
+
+.display .lede { color: var(--ink); }
+
+/* Accented word inside hero copy (e.g. "replace") */
+.display .accent {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* ---------- Reel ---------- */
+
+.reel {
+  display: inline-flex;
+  vertical-align: baseline;
+  position: relative;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  width: var(--reel-w, auto);
+  transition: width var(--rot-dur) var(--rot-ease-chain);
+  will-change: width;
+  padding-right: 0.04em;
+}
+
+/* Block reel: sits on its own line, full-width with a max-width cap,
+   content centered and allowed to wrap. The stage is sized once to
+   the tallest face, so swapping words never reflows surrounding text. */
+.reel--block {
+  display: block;
+  width: 100%;
+  max-width: 26ch;
+  margin: 0.1em auto 0;
+  padding: 0;
+  text-align: center;
+  vertical-align: initial;
+  transition: none;
+  /* Match the display paragraph's typography exactly */
+  font-family: var(--serif-display);
+  font-size: var(--display-size);
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+}
+
+.reel--block-small {
+  font-size: var(--display-size-small);
+}
+
+.reel__stage {
+  position: relative;
+  display: inline-block;
+  transform-style: preserve-3d;
+  min-width: 0;
+  width: 100%;
+  height: 1.15em;
+  line-height: 1.15em;
+}
+
+.reel--block .reel__stage {
+  display: block;
+  height: var(--reel-h, 2.4em);
+  line-height: 1.1;
+}
+
+.reel__face {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: nowrap;
+  padding-right: 0.02em;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-origin: 50% 50%;
+  font-style: normal;
+  color: var(--accent);
+  font-family: var(--serif-display);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+}
+
+.reel--block .reel__face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: normal;
+  padding-right: 0;
+  text-wrap: balance;
+}
+
+.section--pinned .reel__face {
+  justify-content: center;
+}
+
+.reel__face--front {
+  transform: translateZ(0.5em) rotateX(0deg);
+}
+
+.reel.dir-forward .reel__face--incoming {
+  transform: rotateX(-90deg) translateZ(0.5em);
+}
+.reel.dir-forward.is-spinning .reel__face--front {
+  animation: reel-front-forward var(--rot-dur) var(--ease) forwards;
+}
+.reel.dir-forward.is-spinning .reel__face--incoming {
+  animation: reel-incoming-forward var(--rot-dur) var(--ease) forwards;
+}
+.reel.dir-reverse .reel__face--incoming {
+  transform: rotateX(90deg) translateZ(0.5em);
+}
+.reel.dir-reverse.is-spinning .reel__face--front {
+  animation: reel-front-reverse var(--rot-dur) var(--ease) forwards;
+}
+.reel.dir-reverse.is-spinning .reel__face--incoming {
+  animation: reel-incoming-reverse var(--rot-dur) var(--ease) forwards;
+}
+
+@keyframes reel-front-forward {
+  from { transform: rotateX(0deg) translateZ(0.5em); }
+  to   { transform: rotateX(90deg) translateZ(0.5em); }
+}
+@keyframes reel-incoming-forward {
+  from { transform: rotateX(-90deg) translateZ(0.5em); }
+  to   { transform: rotateX(0deg) translateZ(0.5em); }
+}
+@keyframes reel-front-reverse {
+  from { transform: rotateX(0deg) translateZ(0.5em); }
+  to   { transform: rotateX(-90deg) translateZ(0.5em); }
+}
+@keyframes reel-incoming-reverse {
+  from { transform: rotateX(90deg) translateZ(0.5em); }
+  to   { transform: rotateX(0deg) translateZ(0.5em); }
+}
+
+.reel.is-delayed .reel__face--front,
+.reel.is-delayed .reel__face--incoming {
+  animation-delay: var(--reel-delay, 0ms);
+}
+
+.reel__face--blank { color: transparent; }
+
+/* Underline that draws in during the hold zone at the end of each
+   pinned section. scaleX is driven directly from JS each rAF. */
+.reel__underline {
+  display: none;
+}
+.reel--block .reel__underline {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-top: 0.35em;
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0.75;
+}
+
+/* Connector reels inherit sentence color */
+#s1-it .reel__face,
+#s2-are .reel__face {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.reel-pair {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.22em;
+}
+
+.reel-pair[data-it-hidden="true"] { gap: 0; }
+
+/* ---------- Section 2 subcopy ---------- */
+
+.subcopy {
+  margin-top: clamp(2rem, 4.5vh, 3rem);
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: clamp(1.02rem, 1.2vw, 1.18rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 48ch;
+  text-wrap: pretty;
+  text-align: center;
+}
+
+.subcopy p { margin: 0 0 0.4em 0; }
+.subcopy p:last-child {
+  margin-bottom: 0;
+  margin-top: 0.6em;
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* ---------- Section 3 ---------- */
+
+#section-3 {
+  justify-content: center;
+}
+
+#section-3 .section__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  column-gap: clamp(2rem, 6vw, 5rem);
+  row-gap: clamp(1.75rem, 3.5vh, 2.75rem);
+  align-items: start;
+}
+
+.s3-lede {
+  grid-column: 1 / 2;
+  grid-row: 1;
+  font-family: var(--serif-display);
+  font-size: clamp(1.7rem, 3.2vw, 2.85rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  max-width: 22ch;
+  text-wrap: pretty;
+  margin: 0;
+}
+
+.s3-lede-follow {
+  grid-column: 1 / 2;
+  grid-row: 2;
+  font-family: var(--serif-display);
+  font-size: clamp(1.7rem, 3.2vw, 2.85rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  max-width: 22ch;
+  text-wrap: pretty;
+  margin: 0;
+  color: var(--ink);
+}
+
+.s3-lede-follow em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.s3-body {
+  grid-column: 2 / 3;
+  grid-row: 1;
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 34ch;
+  text-wrap: pretty;
+  margin: 0.4em 0 0 0;
+  align-self: start;
+}
+
+.s3-meta {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin-top: clamp(1.5rem, 3vh, 2.5rem);
+  list-style: none;
+  padding: clamp(1.5rem, 3.5vh, 2.25rem) 0 0 0;
+  margin: clamp(0.5rem, 2vh, 1.25rem) 0 0 0;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.s3-meta li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  padding: clamp(1rem, 2vh, 1.4rem) clamp(1rem, 1.8vw, 1.5rem);
+  background: var(--accent-soft);
+  border-radius: 14px;
+  min-height: 7.5rem;
+  justify-content: space-between;
+}
+
+.s3-meta__num {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.s3-meta__label {
+  font-family: var(--serif-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.s3-link {
+  grid-column: 2 / 3;
+  grid-row: 2;
+  align-self: start;
+  margin-top: clamp(1rem, 2vh, 1.5rem);
+  padding-top: clamp(1rem, 2vh, 1.5rem);
+  border-top: 1px solid var(--rule);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  transition: color 200ms ease;
+  justify-self: start;
+  width: fit-content;
+}
+
+.s3-link:hover { color: var(--accent); }
+.s3-link .arrow {
+  font-style: normal;
+  transition: transform 240ms cubic-bezier(0.2, 0.85, 0.25, 1);
+  color: var(--ink-muted);
+}
+.s3-link:hover .arrow {
+  transform: translateX(5px);
+  color: var(--accent);
+}
+
+/* ---------- Section 4 ---------- */
+
+#section-4 .section__inner { max-width: 1100px; }
+
+.s4-cta-row {
+  margin-top: clamp(2.5rem, 5.5vh, 4rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 500ms ease, transform 500ms cubic-bezier(0.2, 0.85, 0.25, 1);
+  pointer-events: none;
+}
+
+.s4-cta-row.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.cta {
+  appearance: none;
+  border: 0;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.55vw, 1.4rem);
+  letter-spacing: 0.002em;
+  padding: 0.75em 1.5em;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 240ms ease, transform 240ms cubic-bezier(0.2, 0.85, 0.25, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.cta::after {
+  content: "→";
+  font-style: normal;
+  transition: transform 240ms cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+
+.cta:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+.cta:hover::after { transform: translateX(3px); }
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .reel { transition: none; }
+  .reel__face--front, .reel__face--incoming { animation: none !important; }
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 720px) {
+  :root {
+    --display-size: clamp(1.9rem, 8.2vw, 3rem);
+    --display-size-small: clamp(1.7rem, 7.2vw, 2.6rem);
+  }
+
+  .display { max-width: 16ch; }
+
+  #section-3 .section__inner {
+    grid-template-columns: 1fr;
+    row-gap: clamp(1.5rem, 3.5vh, 2.25rem);
+  }
+  .s3-lede, .s3-lede-follow, .s3-body, .s3-meta, .s3-link {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    max-width: 100%;
+    margin-top: 0;
+  }
+  .s3-meta {
+    grid-template-columns: 1fr;
+    padding-top: 1.5rem;
+  }
+  .s3-meta li { min-height: 0; }
+  .s3-link { align-self: start; justify-self: start; }
+}
+
+/* ---------- Selection ---------- */
+::selection { background: rgba(192, 120, 48, 0.18); color: var(--ink); }
+
+/* ---------- Subtle paper texture ---------- */
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(28, 26, 23, 0.022) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.section, .wordmark { position: relative; z-index: 2; }
+.wordmark { position: fixed; }
