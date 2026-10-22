@@ -219,6 +219,16 @@ a { color: var(--ink); }
 .lead + .lead { margin-top: 20px; }
 .band .lead { color: var(--on-ink-soft); }
 
+.source {
+  margin: 28px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule-dark);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--on-ink-muted);
+}
+.source a { color: var(--on-ink); }
+
 .note {
   margin: 0;
   font-size: 13px;
