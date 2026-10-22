@@ -24,10 +24,3 @@ should appear in the "Waitlist" tab.
 
 If you change `apps-script.gs` later, use **Deploy > Manage deployments >
 Edit > New version** so the URL stays the same.
-
-## Privacy
-
-IP addresses count as personal data under GDPR. The pop-up no longer
-says what is stored, so add a privacy note somewhere on the site (the
-footer works) before promoting the page widely, or stop sending the IP
-by removing `ip: geo.ip` from `waitlist.js`.

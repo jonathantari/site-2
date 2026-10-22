@@ -174,7 +174,7 @@
       })
       .finally(function () {
         submitBtn.disabled = false;
-        submitBtn.textContent = "Add my region";
+        submitBtn.textContent = "Add my city";
       });
   });
 
