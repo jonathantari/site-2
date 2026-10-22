@@ -1,5 +1,10 @@
+/** @OnlyCurrentDoc */
+
 /**
  * Turnaround — region waitlist backend.
+ *
+ * The line above limits this script's Google permission to the one
+ * spreadsheet it is attached to (not all of your spreadsheets).
  *
  * Paste this into the Apps Script editor of the Google Sheet that should
  * hold the waitlist (Extensions > Apps Script), then deploy it as a web app.
