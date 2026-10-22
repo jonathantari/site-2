@@ -735,3 +735,31 @@ body.modal-open { overflow: hidden; }
 
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 ::selection { background: var(--accent); color: var(--ink); }
+
+/* ---------- Small phones ---------- */
+
+@media (max-width: 640px) {
+  /* Nav: logo and one button on a single row; section links live in the page */
+  .nav { flex-wrap: nowrap; }
+  .nav__links { flex-wrap: nowrap; gap: 0; }
+  .nav__links a:not(.pill):not([aria-current]) { display: none; }
+  .nav__links a[aria-current] { display: none; }
+  .nav .pill { white-space: nowrap; }
+
+  /* Closing CTA and other big buttons: full width, never wider than the screen */
+  .pill--accent,
+  .cta-band .pill { width: 100%; justify-content: center; white-space: normal; text-align: center; padding: 16px 24px; }
+  .hero__actions .pill--lg { width: 100%; justify-content: center; }
+
+  /* Stats: keep the big numbers inside their boxes */
+  .stat { padding: 22px 18px; }
+  .stat__num { font-size: clamp(34px, 11vw, 48px); }
+}
+
+@media (max-width: 360px) {
+  .stats { grid-template-columns: 1fr; }
+  .nav { gap: 12px; }
+  .brand { gap: 8px; }
+  .brand__name { font-size: 18px; }
+  .nav .pill { padding: 0 14px; font-size: 14px; }
+}
