@@ -375,9 +375,17 @@ a { color: var(--ink); }
 
 /* ---------- Business marquee ---------- */
 
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-.marquee { overflow: hidden; margin-top: 16px; }
+/* marquee.js drives the scroll position, so the row auto-plays
+   and can still be swiped or dragged by hand */
+.marquee {
+  margin-top: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.marquee::-webkit-scrollbar { display: none; }
 .marquee--first { margin-top: 56px; }
 
 .marquee__track {
@@ -387,14 +395,6 @@ a { color: var(--ink); }
   display: flex;
   gap: 16px;
   width: max-content;
-  animation: marquee 80s linear infinite;
-}
-.marquee__track--rev { animation-direction: reverse; animation-duration: 90s; }
-.marquee:hover .marquee__track { animation-play-state: paused; }
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee__track { animation: none; }
-  .marquee { overflow-x: auto; }
 }
 
 .biz {
