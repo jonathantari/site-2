@@ -27,6 +27,7 @@ Edit > New version** so the URL stays the same.
 
 ## Privacy
 
-IP addresses count as personal data under GDPR. The modal tells people what
-is stored. Link a privacy policy where it says `[PRIVACY POLICY]` in
-`index.html` before promoting the page widely.
+IP addresses count as personal data under GDPR. The pop-up no longer
+says what is stored, so add a privacy note somewhere on the site (the
+footer works) before promoting the page widely, or stop sending the IP
+by removing `ip: geo.ip` from `waitlist.js`.

@@ -19,8 +19,6 @@
   var done = modal.querySelector('[data-view="done"]');
   var regionInput = modal.querySelector("#wl-region");
   var emailInput = modal.querySelector("#wl-email");
-  var geoHint = modal.querySelector("[data-geo-hint]");
-  var geoText = modal.querySelector("[data-geo-text]");
   var errorBox = modal.querySelector("[data-error]");
   var submitBtn = modal.querySelector(".modal__submit");
   var doneRegion = modal.querySelector("[data-done-region]");
@@ -63,17 +61,8 @@
   }
 
   function prefillRegion() {
-    geoHint.hidden = false;
-    geoText.textContent = "Finding your location…";
     lookUpLocation().then(function () {
-      if (geo.region && !regionInput.value) {
-        regionInput.value = geo.region;
-        geoText.textContent = "Filled in from your location. Change it if it’s wrong.";
-      } else if (!geo.region) {
-        geoText.textContent = "Type the city or area where you’d want to search.";
-      } else {
-        geoHint.hidden = true;
-      }
+      if (geo.region && !regionInput.value) regionInput.value = geo.region;
     });
   }
 

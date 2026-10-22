@@ -320,15 +320,10 @@
       <form class="modal__view" data-view="form" novalidate>
         <p class="modal__kicker">Waitlist</p>
         <h2 id="wl-title" class="modal__title">Bring Turnaround to your city</h2>
-        <p class="modal__body">We open chapters where the interest is. Add yours and we&rsquo;ll let you know when a cohort starts nearby.</p>
 
         <div class="field">
           <label for="wl-region">Your city</label>
           <input id="wl-region" name="region" type="text" autocomplete="address-level2" placeholder="City, country" required maxlength="120" />
-          <p class="field__hint" data-geo-hint>
-            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-            <span data-geo-text>Finding your location&hellip;</span>
-          </p>
         </div>
 
         <div class="field">
@@ -339,7 +334,6 @@
         <p class="field__error" data-error role="alert" hidden></p>
 
         <button type="submit" class="modal__submit">Add my city</button>
-        <p class="modal__fine">We store your city, the time and your IP address to count interest by area. [PRIVACY POLICY]</p>
       </form>
 
       <div class="modal__view" data-view="done" hidden>
@@ -352,7 +346,7 @@
   </div>
 
   <script src="marquee.js?v=2" defer></script>
-  <script src="waitlist.js?v=2" defer></script>
+  <script src="waitlist.js?v=3" defer></script>
   <script src="footnotes.js?v=1" defer></script>
 </body>
 </html>
