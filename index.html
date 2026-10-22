@@ -13,7 +13,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="styles.css?v=29" />
+  <link rel="stylesheet" href="styles.css?v=30" />
 
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
@@ -39,7 +39,7 @@
           <a href="#local">The businesses</a>
           <a href="#value">Returns</a>
           <a href="investors.html">For investors</a>
-          <a href="#apply" class="pill">Apply</a>
+          <button type="button" class="pill" data-waitlist-open>Join the waitlist</button>
         </div>
       </nav>
     </header>
@@ -56,7 +56,7 @@
             <p class="hero__aside"><strong>Entrepreneurship through acquisition (ETA)</strong> is the taking over of an existing business and leading it into its next chapter.</p>
           </div>
           <div class="hero__actions">
-            <a href="#apply" class="pill pill--lg">Apply for the next cohort</a>
+            <button type="button" class="pill pill--lg" data-waitlist-open>Add your city to the waitlist</button>
             <a href="#how" class="text-link">How it works</a>
           </div>
         </div>
@@ -67,17 +67,122 @@
         <div class="wrap section split">
           <h2 id="public-title" class="h2">Keeping a good business alive is a public good.</h2>
           <div>
-            <p class="lead">A generation of owners is retiring. Every year, hundreds of thousands of good businesses with real customers and room to grow risk closing because nobody is ready to take over.</p>
-            <p class="lead">The entrepreneurs who take these companies over are doing their community a real service, which is why their community should help them do it.</p>
-            <p class="source">In the EU alone, around 150,000 businesses and 600,000 jobs are at risk each year (<a href="https://www.eesc.europa.eu/en/news-media/eesc-info/112022/articles/102465">European Commission</a>). In the US, 2.3 million businesses owned by retiring baby boomers employ 24.7 million people (<a href="https://www.chicagofed.org/publications/profitwise-news-and-views/2020/rethinking-options-for-retiring-entrepreneurs">Federal Reserve Bank of Chicago</a>).</p>
+            <p class="lead">A generation of owners is retiring. Every year, hundreds of thousands of good businesses with real customers are closing<button type="button" class="fn-ref" aria-expanded="false" aria-controls="fn-public" aria-label="Show source">*</button> because nobody is ready to take over.</p>
+            <p class="lead">The entrepreneurs who take them into the next generation are doing their community a service, which is why their community should help them do it.</p>
+            <p class="source" id="fn-public" hidden>In the EU alone, around 150,000 businesses and 600,000 jobs are at risk each year (<a href="https://www.eesc.europa.eu/en/news-media/eesc-info/112022/articles/102465">European Commission</a>). In the US, 2.3 million businesses owned by retiring baby boomers employ 24.7 million people (<a href="https://www.chicagofed.org/publications/profitwise-news-and-views/2020/rethinking-options-for-retiring-entrepreneurs">Federal Reserve Bank of Chicago</a>).</p>
           </div>
         </div>
       </section>
 
+      <!-- ================= THE BUSINESSES ================= -->
+      <section id="local" class="section" aria-labelledby="local-title">
+        <div class="wrap">
+          <p class="kicker">For entrepreneurs who aren't afraid to get their hands dirty</p>
+          <h2 id="local-title" class="h2" style="max-width: 20ch;">The hard-working backbone of the economy</h2>
+          <ul class="chips" aria-label="How we are organised">
+            <li>Local businesses</li>
+            <li>Retiring owners</li>
+            <li>Vetted financials</li>
+          </ul>
+        </div>
+
+        <!-- Each track is duplicated by marquee.js so the loop is seamless -->
+        <div class="marquee marquee--first">
+          <ul class="marquee__track" aria-label="Examples of businesses searchers take over">
+            <li class="biz">
+              <img src="images/glass-fabrication.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Glass fabrication</span>
+              <span class="biz__meta">14 employees · €2.5M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/auto-parts.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Auto parts supplier</span>
+              <span class="biz__meta">22 employees · €6M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/graffiti-removal.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Graffiti removal</span>
+              <span class="biz__meta">9 employees · €1M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/hvac.jpg" alt="" loading="lazy" />
+              <span class="biz__name">HVAC installer</span>
+              <span class="biz__meta">31 employees · €5M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/bakery.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Industrial bakery</span>
+              <span class="biz__meta">40 employees · €6M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/sign-maker.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Sign maker</span>
+              <span class="biz__meta">6 employees · €800k revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/boatyard.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Boatyard</span>
+              <span class="biz__meta">12 employees · €2M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/bicycle-frames.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Bicycle frame builder</span>
+              <span class="biz__meta">5 employees · €600k revenue</span>
+            </li>
+          </ul>
+        </div>
+        <div class="marquee">
+          <ul class="marquee__track marquee__track--rev" aria-hidden="true">
+            <li class="biz">
+              <img src="images/elevator-servicing.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Elevator servicing</span>
+              <span class="biz__meta">18 employees · €3M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/laundry.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Commercial laundry</span>
+              <span class="biz__meta">27 employees · €3M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/pipe-organ.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Pipe organ restoration</span>
+              <span class="biz__meta">7 employees · €900k revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/scaffolding.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Scaffolding rental</span>
+              <span class="biz__meta">35 employees · €5M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/locksmith.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Locksmith</span>
+              <span class="biz__meta">8 employees · €1M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/cold-storage.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Cold storage</span>
+              <span class="biz__meta">19 employees · €4M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/stone-masonry.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Stone masonry</span>
+              <span class="biz__meta">11 employees · €1.5M revenue</span>
+            </li>
+            <li class="biz">
+              <img src="images/beekeeping.jpg" alt="" loading="lazy" />
+              <span class="biz__name">Beekeeping supplies</span>
+              <span class="biz__meta">4 employees · €700k revenue</span>
+            </li>
+          </ul>
+        </div>
+        <p class="wrap note marquee-note">Illustrative examples. Profitable businesses like these typically sell for 2–4× their yearly profit.</p>
+      </section>
+
       <!-- ================= HOW IT WORKS ================= -->
-      <section id="how" class="wrap section" aria-labelledby="how-title">
+      <section id="how" class="ruled" aria-labelledby="how-title">
+        <div class="wrap section how">
         <p class="kicker">Why reinvent the wheel?</p>
-        <h2 id="how-title" class="h2" style="line-height: 1.04;"><span style="display: block; max-width: 22ch;">Let&rsquo;s get you to the part that matters most: <span class="underline-accent">the turnaround.</span></span></h2>
+        <h2 id="how-title" class="h2 how__title">Let&rsquo;s get you to the part that matters most: <span class="underline-accent">the turnaround.</span></h2>
 
         <div class="cards">
           <div class="card">
@@ -124,118 +229,15 @@
             </ol>
           </div>
         </div>
-      </section>
-
-      <!-- ================= THE BUSINESSES ================= -->
-      <section id="local" class="ruled section" aria-labelledby="local-title">
-        <div class="wrap">
-          <p class="kicker">For entrepreneurs who aren't afraid to get their hands dirty</p>
-          <h2 id="local-title" class="h2" style="max-width: 20ch;">The hard-working backbone of the economy</h2>
-          <ul class="chips" aria-label="How we are organised">
-            <li>Local chapters</li>
-            <li>Local cohorts</li>
-            <li>Local businesses</li>
-          </ul>
         </div>
-
-        <!-- Each track is duplicated by marquee.js so the loop is seamless -->
-        <div class="marquee marquee--first">
-          <ul class="marquee__track" aria-label="Examples of businesses searchers take over">
-            <li class="biz">
-              <img src="images/glass-fabrication.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Glass fabrication</span>
-              <span class="biz__tags"><span>14 employees</span><span>€2.5M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/auto-parts.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Auto parts supplier</span>
-              <span class="biz__tags"><span>22 employees</span><span>€6M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/graffiti-removal.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Graffiti removal</span>
-              <span class="biz__tags"><span>9 employees</span><span>€1M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/hvac.jpg" alt="" loading="lazy" />
-              <span class="biz__name">HVAC installer</span>
-              <span class="biz__tags"><span>31 employees</span><span>€5M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/bakery.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Industrial bakery</span>
-              <span class="biz__tags"><span>40 employees</span><span>€6M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/sign-maker.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Sign maker</span>
-              <span class="biz__tags"><span>6 employees</span><span>€800k revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/boatyard.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Boatyard</span>
-              <span class="biz__tags"><span>12 employees</span><span>€2M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/bicycle-frames.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Bicycle frame builder</span>
-              <span class="biz__tags"><span>5 employees</span><span>€600k revenue</span></span>
-            </li>
-          </ul>
-        </div>
-        <div class="marquee">
-          <ul class="marquee__track marquee__track--rev" aria-hidden="true">
-            <li class="biz">
-              <img src="images/elevator-servicing.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Elevator servicing</span>
-              <span class="biz__tags"><span>18 employees</span><span>€3M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/laundry.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Commercial laundry</span>
-              <span class="biz__tags"><span>27 employees</span><span>€3M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/pipe-organ.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Pipe organ restoration</span>
-              <span class="biz__tags"><span>7 employees</span><span>€900k revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/scaffolding.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Scaffolding rental</span>
-              <span class="biz__tags"><span>35 employees</span><span>€5M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/locksmith.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Locksmith</span>
-              <span class="biz__tags"><span>8 employees</span><span>€1M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/cold-storage.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Cold storage</span>
-              <span class="biz__tags"><span>19 employees</span><span>€4M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/stone-masonry.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Stone masonry</span>
-              <span class="biz__tags"><span>11 employees</span><span>€1.5M revenue</span></span>
-            </li>
-            <li class="biz">
-              <img src="images/beekeeping.jpg" alt="" loading="lazy" />
-              <span class="biz__name">Beekeeping supplies</span>
-              <span class="biz__tags"><span>4 employees</span><span>€700k revenue</span></span>
-            </li>
-          </ul>
-        </div>
-        <p class="wrap note marquee-note">Illustrative examples. Profitable businesses like these typically sell for 2–4× their yearly profit.</p>
       </section>
 
       <!-- ================= BE A GREAT BOSS ================= -->
       <section class="band--accent" aria-labelledby="jobs-title">
         <div class="wrap section split split--end jobs">
           <div>
-            <p class="kicker">We need more great managers</p>
-            <h2 id="jobs-title" class="h2 jobs__title">The world is changing fast. Don&rsquo;t these people deserve to be brought along?</h2>
+            <p class="kicker">The world needs more great managers</p>
+            <h2 id="jobs-title" class="h2 jobs__title">The economy is changing fast. Don&rsquo;t these people deserve to be brought along?</h2>
           </div>
           <ol class="rules">
             <li><b>First</b>Get the business to steady, positive cash flow.</li>
@@ -282,7 +284,7 @@
             <h2 id="apply-title" class="h-closing">Why Search when you could Turnaround?</h2>
             <p class="cta-band__sub">Coming soon to a region near you.</p>
           </div>
-          <button type="button" class="pill pill--accent" data-waitlist-open>Add your region to the waitlist</button>
+          <button type="button" class="pill pill--accent" data-waitlist-open>Add your city to the waitlist</button>
         </div>
       </section>
 
@@ -292,13 +294,13 @@
     <footer class="footer">
       <div class="wrap footer__inner">
         <div class="footer__brand">
-          <p class="footer__mark"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3H4v18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/><path d="M14 21h6V3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/></svg><span>Turnaround</span></p>
+          <p class="footer__mark footer__mark--accent"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3H4v18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/><path d="M14 21h6V3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/></svg><span>Turnaround</span></p>
           <p class="footer__tag">A search fund accelerator <b>for the public good.</b></p>
         </div>
         <nav aria-label="Footer">
           <a href="https://jonathantari.github.io/website/site/">Read the manifesto</a>
           <a href="investors.html">For investors</a>
-          <a href="#apply">Apply</a>
+          <a href="#apply">Join the waitlist</a>
           <a href="mailto:me@jonathantari.com?subject=Turnaround">Contact</a>
         </nav>
         <p class="footer__legal">© 2026 Turnaround · EU</p>
@@ -317,11 +319,11 @@
 
       <form class="modal__view" data-view="form" novalidate>
         <p class="modal__kicker">Waitlist</p>
-        <h2 id="wl-title" class="modal__title">Bring Turnaround to your region</h2>
+        <h2 id="wl-title" class="modal__title">Bring Turnaround to your city</h2>
         <p class="modal__body">We open chapters where the interest is. Add yours and we&rsquo;ll let you know when a cohort starts nearby.</p>
 
         <div class="field">
-          <label for="wl-region">Your region</label>
+          <label for="wl-region">Your city</label>
           <input id="wl-region" name="region" type="text" autocomplete="address-level2" placeholder="City, country" required maxlength="120" />
           <p class="field__hint" data-geo-hint>
             <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
@@ -336,8 +338,8 @@
 
         <p class="field__error" data-error role="alert" hidden></p>
 
-        <button type="submit" class="modal__submit">Add my region</button>
-        <p class="modal__fine">We store your region, the time and your IP address to count interest by area. [PRIVACY POLICY]</p>
+        <button type="submit" class="modal__submit">Add my city</button>
+        <p class="modal__fine">We store your city, the time and your IP address to count interest by area. [PRIVACY POLICY]</p>
       </form>
 
       <div class="modal__view" data-view="done" hidden>
@@ -350,6 +352,7 @@
   </div>
 
   <script src="marquee.js?v=2" defer></script>
-  <script src="waitlist.js?v=1" defer></script>
+  <script src="waitlist.js?v=2" defer></script>
+  <script src="footnotes.js?v=1" defer></script>
 </body>
 </html>

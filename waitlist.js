@@ -148,7 +148,7 @@
     var email = emailInput.value.trim();
 
     if (!region) {
-      errorBox.textContent = "Add the region you’d like us to open in.";
+      errorBox.textContent = "Add the city you’d like us to open in.";
       errorBox.hidden = false;
       regionInput.focus();
       return;
