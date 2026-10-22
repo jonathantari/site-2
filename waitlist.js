@@ -9,7 +9,7 @@
 
   // Paste the Apps Script web app URL here once it is deployed.
   // Until then the form still works on the page but nothing is stored.
-  var WAITLIST_ENDPOINT = "";
+  var WAITLIST_ENDPOINT = "https://script.google.com/macros/s/AKfycbxRDSO56FPQFuyfT9CL1baRjSljwiJWhM8kOaiDUqJvvilsWm8kg6TTzR4wXRcZhrG5/exec";
 
   var modal = document.getElementById("waitlist");
   if (!modal) return;

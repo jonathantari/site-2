@@ -2,8 +2,9 @@
    Each row is a horizontally scrollable strip. The cards are duplicated
    once so the loop has no seam, and the row drifts on its own by moving
    scrollLeft. Because it is real scrolling, people can also swipe it on
-   a phone or drag it with a trackpad; it pauses while they do, and while
-   a mouse hovers over it, then carries on from wherever they left it.
+   a phone or drag it with a trackpad; it pauses while they do, then
+   carries on from wherever they left it. Hovering with a mouse does not
+   pause it.
 ---------------------------------------------------- */
 
 (function () {
@@ -34,7 +35,6 @@
     var half = 0;
     var last = 0;
     var touching = false;
-    var hovering = false;
     var pausedUntil = 0;
     var visible = true;
     var ourScroll = false;
@@ -61,7 +61,7 @@
     function tick(now) {
       var dt = last ? Math.min((now - last) / 1000, 0.1) : 0;
       last = now;
-      if (visible && !touching && !hovering && now >= pausedUntil && half > 0) {
+      if (visible && !touching && now >= pausedUntil && half > 0) {
         setPos(pos + speed * dt);
       }
       requestAnimationFrame(tick);
@@ -79,9 +79,6 @@
     box.addEventListener("touchend", function () { touching = false; pause(RESUME_MS); }, { passive: true });
     box.addEventListener("touchcancel", function () { touching = false; pause(RESUME_MS); }, { passive: true });
     box.addEventListener("wheel", function () { pause(RESUME_MS); }, { passive: true });
-    // Mouse only: on phones a tap fires enter without a matching leave.
-    box.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") hovering = true; });
-    box.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") hovering = false; });
 
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
